@@ -1,0 +1,7 @@
+logs/
+target/
+test-output/
+.project
+.classpath
+.settings/
+/.idea/

@@ -1,0 +1,6 @@
+caseid,description,index,exp_code,msg
+1,查询结果正常,1,1
+2,页数未null,null,0
+3,页数未空串,,0
+4,页数不传,,0
+5,不存在的页数,test11,0

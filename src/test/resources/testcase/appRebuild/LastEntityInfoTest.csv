@@ -1,0 +1,7 @@
+caseid,description,entity_id,seat_code,exp_code,msg
+1,查询结果正常,99932333,A8,1
+2,entity_id为null,null,A8,0
+3,entity_id为空串,,A8,0
+4,不传entity_id,,A8,0
+5,不传桌码,99932333,,1
+6,不存在的店铺,test,A8,0

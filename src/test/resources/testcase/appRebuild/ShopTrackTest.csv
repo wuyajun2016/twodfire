@@ -1,0 +1,5 @@
+caseid,description,current_page,page_size,exp_code,msg
+1,查询结果正常,1,20,1
+2,current_page和page_size为空串,,,1
+3,current_page和page_size未null,null,null,1
+4,不传current_page和page_size,,,1

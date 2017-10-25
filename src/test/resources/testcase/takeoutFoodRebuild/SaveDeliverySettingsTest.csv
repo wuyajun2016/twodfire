@@ -1,0 +1,5 @@
+caseid,description,exp_code,msg,deliveryTime,outFee,outFeeMode
+1,必填项未填写,1,提示点啥,,,1
+2,多久送达只能输入正整,1,参数错误！,30.33,0,1
+3,选择按距离配送4保存,1,,60,0,4
+4,选择其他模式1(按固定价格)保存,1,,60,2006,1

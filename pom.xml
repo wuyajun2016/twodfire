@@ -1,0 +1,371 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.dfire</groupId>
+  <artifactId>twodfire-api-testing</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>twodfire-api-testing</name>
+  <url>http://maven.apache.org</url>
+
+  <build>
+        <filters>
+            <filter>src/test/filter/${env}.properties</filter>
+        </filters>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <reportFormat>xml</reportFormat>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+    
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+           
+        </profile>
+        <profile>
+            <id>daily</id>
+            <properties>
+                <env>daily</env>
+            </properties>
+             <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>pre</id>
+            <properties>
+                <env>pre</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>publish</id>
+            <properties>
+                <env>publish</env>
+            </properties>
+        </profile>
+    </profiles>
+    
+    
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.directory>target</project.build.directory>
+    <gson-version>2.2.4</gson-version>
+    <spring-web-version>4.0.6.RELEASE</spring-web-version>
+    <opencsv-version>2.4</opencsv-version>
+    <testng-version>6.9.10</testng-version>
+    <zkclient-version>0.7</zkclient-version>
+    <matrix-client.version>1.2.5</matrix-client.version>
+	<turtle-client.version>1.1.10</turtle-client.version>
+	<trade-platform-version>1.0.5</trade-platform-version>
+	<twodfire-session-version>1.0.8</twodfire-session-version>
+  </properties>
+
+
+  <dependencies>
+  
+  	<dependency>
+		  <groupId>com.dfire.sdk</groupId>
+		  <artifactId>dop-sdk</artifactId>
+		  <version>1.2.6</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.alibaba</groupId>
+		  <artifactId>fastjson</artifactId>
+		  <version>1.2.32-dfire-SNAPSHOT</version>
+		</dependency>
+			
+		 <dependency>
+            <groupId>com.twodfire</groupId>
+            <artifactId>twodfire-logback</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+		<dependency>
+			 <groupId>com.dfire.soa</groupId>
+			 <artifactId>order-client</artifactId>
+			 <version>2.3.11-test-SNAPSHOT</version>
+		</dependency>
+  	
+  		<dependency>
+    		<groupId>org.apache.commons</groupId>
+    		<artifactId>commons-lang3</artifactId>
+    		<version>3.4</version>
+		</dependency>
+		
+		 <dependency>
+            <groupId>com.twodfire</groupId>
+            <artifactId>twodfire-session</artifactId>
+            <version>${twodfire-session-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.twodfire</groupId>
+                    <artifactId>twodfire-util</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+		<!--zk -->
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>${zkclient-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.34</version>
+        </dependency>
+        <!--redis -->
+        <dependency>
+            <groupId>com.twodfire</groupId>
+            <artifactId>twodfire-redis</artifactId>
+            <version>1.3.15</version>
+        </dependency>
+        <!--log -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <!--jacoco -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.core</artifactId>
+            <version>0.7.7.201606060606</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.report</artifactId>
+            <version>0.7.7.201606060606</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dfire.reportng</groupId>
+            <artifactId>reportng</artifactId>
+            <version>1.1.7-SNAPSHOT</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>au.com.bytecode</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>${opencsv-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.twodfire</groupId>
+            <artifactId>twodfire-util</artifactId>
+            <version>1.5.0</version>
+            <exclusions>
+				<exclusion>
+					<groupId>com.alibaba</groupId>
+					<artifactId>fastjson</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+        
+         <!-- Spring 相关 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-web-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring-web-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-web-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dfire.test</groupId>
+            <artifactId>test-util</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+        
+        
+       
+        
+        	<!-- Json Schema  用于 Json 的数据校验 -->    
+		<dependency>
+		    <groupId>com.github.fge</groupId>
+		    <artifactId>json-schema-validator</artifactId>
+		    <version>2.2.6</version>
+		</dependency>
+		
+		
+		  <!-- httpclient -->
+	    <dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.5.2</version>
+		 </dependency>
+		 
+		
+		<!-- 用于解决 java.lang.NoClassDefFoundError: org/apache/http/ssl/SSLContexts  -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpcore</artifactId>
+		    <version>4.4.4</version>
+		</dependency>
+		
+		<!-- 主要用于文件上传 -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpmime</artifactId>
+		    <version>4.5.3</version>
+		</dependency>
+		
+		
+		<!-- dubbo 依赖客户包 -->
+		 <dependency>
+            <groupId>com.dfire.soa</groupId>
+            <artifactId>wechat-client</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        
+        
+        
+        <dependency>
+            <groupId>com.dfire.mc</groupId>
+            <artifactId>mc-client</artifactId>
+            <version>1.0.16</version>
+        </dependency>
+        
+          <!--会员服务化-->
+        <dependency>
+            <groupId>com.dfire.soa</groupId>
+            <artifactId>member-client</artifactId>
+            <version>1.1.29</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zmsoft.manager</groupId>
+                    <artifactId>com.zmsoft.zm.service</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.zmsoft.manager</groupId>
+                    <artifactId>com.zmsoft.zm.zmbo</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+         <!-- 商品服务 -->
+        <dependency>
+            <groupId>com.dfire.soa</groupId>
+            <artifactId>item-client</artifactId>
+            <version>1.6.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>log4j-over-slf4j</artifactId>
+                </exclusion>
+                <!--<exclusion>-->
+                <!--<artifactId>dfire-util</artifactId>-->
+                <!--<groupId>com.twodfire</groupId>-->
+                <!--</exclusion>-->
+            </exclusions>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dfire.soa</groupId>
+            <artifactId>matrix-client</artifactId>
+            <version>${matrix-client.version}</version>
+        </dependency>
+        
+         <dependency>
+            <groupId>com.dfire.soa</groupId>
+            <artifactId>turtle-client</artifactId>
+            <version>${turtle-client.version}</version>
+        </dependency>
+        
+
+         <dependency>
+		   <groupId>com.dfire.soa</groupId>
+		   <artifactId>order-client</artifactId>
+		   <version>2.3.11-test-SNAPSHOT</version>	  
+		</dependency>
+
+		 <!-- tp client -->
+        <dependency>
+            <groupId>com.dfire.tp</groupId>
+            <artifactId>tp-client</artifactId>
+            <version>${trade-platform-version}</version>
+        </dependency>
+
+  </dependencies>
+</project>
