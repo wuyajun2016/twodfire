@@ -4,7 +4,8 @@
 	<test name="twodfire-api-testing" >
 		<packages>
 			<!-- <package name="com.dfire.*"></package> -->
-			<package name="com.dfire.takeoutFoodRebuild"></package>
+			<!-- <package name="com.dfire.takeoutFoodRebuild"></package> -->
+			<class name="com.dfire.takeoutFoodRebuild.SaveTimeTest"/>
 		</packages>
 	</test>
 	
