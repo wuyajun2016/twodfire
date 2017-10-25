@@ -49,11 +49,11 @@ public class zgTest extends TestBase{
         Response response = null;
         try {
 //	    	System.out.println("获取外卖设置1---------"+takeoutFoodUntils.gettakeoutsetting()); 
-	    	System.out.println("获取外卖设置5---------"+takeoutFoodUntils.shopsetting());
+//	    	System.out.println("获取外卖设置5---------"+takeoutFoodUntils.shopsetting());
 	    	
 //	    	System.out.println("获取门店设置2---------"+takeoutFoodUntils.gettimes());  
 //	    	System.out.println("获取配送设置3---------"+takeoutFoodUntils.getdeliverysetting());  
-//	    	System.out.println("获取配送价格列表4---------"+takeoutFoodUntils.getdistributionpricelist());    
+	    	System.out.println("获取配送价格列表4---------"+takeoutFoodUntils.getdistributionpricelist());    
 	    	
 //	    	takeoutFoodUntils.removetimes("id");//删除外卖时间段
 //	    	takeoutFoodUntils.removedeliveryprice("id");//删除配送价格

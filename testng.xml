@@ -2,16 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" verbose="1"  >
 	<test name="twodfire-api-testing" >
-		
-			<!-- <packages>
-			
+		<packages>
+			<!-- <package name="com.dfire.*"></package> -->
 			<package name="com.dfire.takeoutFoodRebuild"></package>
 		</packages>
-		-->
-		<classes>
-			<class name="com.dfire.takeoutFoodRebuild.SaveTimeTest" />
-		</classes>	
-		
 	</test>
 	
 	<listeners>

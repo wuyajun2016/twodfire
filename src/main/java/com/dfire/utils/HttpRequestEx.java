@@ -41,10 +41,10 @@ public class HttpRequestEx {
 	
 	private static final Logger logger = Logger.getLogger(HttpRequestEx.class);
 	private String host;
-    private HttpClient httpClient = new DefaultHttpClient();   //---john之前是用这句，为了抓包改成了下面两句
+//    private HttpClient httpClient = new DefaultHttpClient();   //---john之前是用这句，为了抓包改成了下面两句
 //    如果走https的请求要改回去
-//	HttpHost proxy = new HttpHost("localhost", 8888);
-//	HttpClient httpClient = HttpClients.custom().setProxy(proxy).build();
+	HttpHost proxy = new HttpHost("localhost", 8888);
+	HttpClient httpClient = HttpClients.custom().setProxy(proxy).build();
 
 	public HttpRequestEx(){
 		super();
