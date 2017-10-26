@@ -45,6 +45,7 @@ public class takeoutFoodUntils extends TestBase{
 		int isOpenElectronicAccounts; //电子账户开通情况
 		int isOut; //是否开通外卖
 		int isSetBrandAddress; //店铺地址设置情况
+		int test; 
 		
         Response response = null;
         HttpRequestEx httpRequest = new HttpRequestEx();
