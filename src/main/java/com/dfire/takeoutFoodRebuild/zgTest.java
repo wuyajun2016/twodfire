@@ -35,7 +35,7 @@ public class zgTest extends TestBase{
     public static String description;
     public static int exp_code;
     public static String msg;
-	public static String msg4;
+	public static String msg5;
 
     String http_url = getConfigForZG().get("url");
     @Test(dataProvider = "CsvDataProvider")
