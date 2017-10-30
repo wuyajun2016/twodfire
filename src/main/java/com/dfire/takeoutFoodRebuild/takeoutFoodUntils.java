@@ -45,7 +45,6 @@ public class takeoutFoodUntils extends TestBase{
 		int isOpenElectronicAccounts; //电子账户开通情况
 		int isOut; //是否开通外卖
 		int isSetBrandAddress; //店铺地址设置情况
-		int test; 
 		
         Response response = null;
         HttpRequestEx httpRequest = new HttpRequestEx();
@@ -287,7 +286,6 @@ public class takeoutFoodUntils extends TestBase{
             Assert.assertEquals(response.getStatus(), 200);
             JsonObject resp = new JsonParser().parse(response.getResponseStr()).getAsJsonObject();
             Assert.assertEquals(resp.get("code").getAsInt(), 1,"删除外卖时间段可能失败了！");
-    		Assert.assertEquals(resp.get("code").getAsInt(), 1);
     		Assert.assertEquals(resp.get("data").getAsInt(), 1);
             
 		} catch (Exception e) {
@@ -485,7 +483,6 @@ public class takeoutFoodUntils extends TestBase{
             Assert.assertEquals(response.getStatus(), 200);
             JsonObject resp = new JsonParser().parse(response.getResponseStr()).getAsJsonObject();
             Assert.assertEquals(resp.get("code").getAsInt(), 1,"删除配送价格可能失败了！");
-    		Assert.assertEquals(resp.get("code").getAsInt(), 1);
     		Assert.assertEquals(resp.get("data").getAsInt(), 1);
             
 		} catch (Exception e) {

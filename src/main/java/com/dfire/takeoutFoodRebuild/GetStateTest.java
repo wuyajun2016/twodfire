@@ -56,7 +56,12 @@ public class GetStateTest extends TestBase{
         // 调用http服务
         Response response = null;
         try {
-        	
+        	//先删除只留下一条时间段数据
+            int numoftimes = (int) takeoutFoodUntils.gettimes().get("length"); //获取外卖时间段共有几条数据
+    		for(int i=1;i<numoftimes;i++){
+    			takeoutFoodUntils.removetimes((String) takeoutFoodUntils.gettimes().get("id0"));
+    		}
+    		
         	List<String> pathUrl = new ArrayList<String>();
         	pathUrl.add(http_url);
 //        	pathUrl.add("/takeout_optimize/api/initial/v1/get_state_for_takeout");
@@ -91,7 +96,7 @@ public class GetStateTest extends TestBase{
             		}
 	        		//获取掌柜端门店设置中的最低起送价格startPrice
 	        		String get_shop_setting_startprice =takeoutFoodUntils.shopsetting().get("startPrice").toString();
-	//        		Assert.assertNotNull(resp.get("data").getAsJsonObject().get("takeout").getAsJsonObject().get("takeoutRangeList"));
+	        		Assert.assertNotNull(resp.get("data").getAsJsonObject().get("takeout").getAsJsonObject().get("takeoutRangeList"));
 	        		Assert.assertEquals(resp.get("data").getAsJsonObject().get("takeout").getAsJsonObject().get("delivery_amount").getAsString(), get_shop_setting_startprice,"最低起送金额返回与掌柜设置不一致");
 	        		Assert.assertEquals(resp.get("data").getAsJsonObject().get("takeout").getAsJsonObject().get("delivery_open_hours").getAsString(), st_end.toString(),"营业时间返回与掌柜设置不一致");
 	        		Assert.assertEquals(resp.get("data").getAsJsonObject().get("takeout").getAsJsonObject().get("can_takeout").getAsInt(), get_takeout_setting_isout,"是否开通外卖返回与掌柜设置不一致");
