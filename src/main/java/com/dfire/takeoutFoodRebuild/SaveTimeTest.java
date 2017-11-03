@@ -144,6 +144,7 @@ public class SaveTimeTest extends TestBase{
             Assert.assertEquals(resp.get("data").getAsJsonObject().get("entityId").getAsString(), entityid,"店铺id返回与期望不一致");
             Assert.assertEquals(resp.get("data").getAsJsonObject().get("num").getAsString(), "-1","外卖限量值返回与期望不一致");
             Assert.assertEquals(resp.get("data").getAsJsonObject().get("beginTime").getAsString(), beginTime.toString(),"开始时间返回与期望不一致");
+            Assert.assertEquals(resp.get("data").getAsJsonObject().get("endTime").getAsString(), endTime.toString(),"结束时间返回与期望不一致");
             Assert.assertEquals(resp.get("data").getAsJsonObject().get("startDeliveryTime").getAsString(), String.valueOf(startDeliveryTime),"开始配送时间返回与期望不一致");
         }
         if("2".equals(caseid)){
@@ -156,11 +157,16 @@ public class SaveTimeTest extends TestBase{
         }
         if("4".equals(caseid)){
         	Assert.assertEquals(resp.get("code").getAsInt(), 1);
-            Assert.assertEquals(num, 20,"外卖数量返回与期望设置的不一致");
+            Assert.assertEquals(takeoutFoodUntils.gettimes().get("num0"), 20,"外卖数量返回与期望设置的不一致");
         }
         if("5".equals(caseid)){
         	Assert.assertEquals(resp.get("code").getAsInt(), 1);
-        	Assert.assertEquals(takeoutFoodUntils.secToTime(beginTime.intValue()), takeoutFoodUntils.gettimes().get("beginTime1").toString(),"修改后的外卖时间与期望的不一致");  //校验修改后的开始时间值值跟查询出来一致
+        	Map<String,Object> updateout = new HashMap<String,Object>();
+        	updateout = takeoutFoodUntils.gettimes();	
+        	Assert.assertEquals(takeoutFoodUntils.secToTime(beginTime.intValue()), updateout.get("beginTime1").toString(),"修改后的外卖开始时间与期望的不一致");  //校验修改后的开始时间值值跟查询出来一致
+        	Assert.assertEquals(takeoutFoodUntils.secToTime(endTime.intValue()), updateout.get("endTime1").toString(),"修改后的外卖结束时间与期望的不一致");
+        	Assert.assertEquals(null, updateout.get("num"),"修改后的外卖上限与期望的不一致");
+        	Assert.assertEquals(startDeliveryTime, updateout.get("startDliveryTime1"),"修改后的外卖开始配送时间与期望的不一致");
         }
         
         

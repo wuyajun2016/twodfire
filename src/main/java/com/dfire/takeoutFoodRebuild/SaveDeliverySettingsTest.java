@@ -118,11 +118,15 @@ public class SaveDeliverySettingsTest extends TestBase{
         	Assert.assertEquals(resp.get("code").getAsInt(), 1);
         	Assert.assertEquals(1, isFulfillDeliverySetting,"按距离配送结果返回与外卖设置中的配送设置值不一致");//设置完配送设置后，肯定等于1
         	Assert.assertEquals(4, outFeeMode,"按距离配送设置的模式返回与期望不一致");
+        	Assert.assertEquals("60", deliveryTime,"按距离配送设置的多久送达时间返回与期望不一致");
+        	Assert.assertEquals("0", outFee,"按距离配送设置的价格返回与期望不一致");//实际上这个是之前存的值
         }
         if("4".equals(caseid)){
         	int isFulfillDeliverySetting = (int) takeoutFoodUntils.gettakeoutsetting().get("isFulfillDeliverySetting");//从配送设置列表中获取下起送距离
         	Assert.assertEquals(resp.get("code").getAsInt(), 1);
         	Assert.assertEquals(1, isFulfillDeliverySetting,"按固定价格配送结果返回与外卖设置中的配送设置值不一致");
+        	Assert.assertEquals("60", deliveryTime,"按距离配送设置的多久送达时间返回与期望不一致");
+        	Assert.assertEquals("2006", outFee,"按距离配送设置的价格返回与期望不一致");
         }
 
 	}

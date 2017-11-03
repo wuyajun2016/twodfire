@@ -8,7 +8,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
+import com.dfire.test.util.DBHelper;
 import com.dfire.testBase.TestBase;
 import com.dfire.utils.Constants;
 import com.dfire.utils.HttpRequestEx;
@@ -149,18 +151,18 @@ public class takeoutFoodUntils extends TestBase{
             Assert.assertEquals(response.getStatus(), 200);
             JsonObject resp = new JsonParser().parse(response.getResponseStr()).getAsJsonObject();
             Assert.assertEquals(resp.get("code").getAsInt(), 1,"获取外卖时间段可能失败了！");
-//            startDliveryTime= resp.getAsJsonArray("data").get(0).getAsJsonObject().get("startDliveryTime").getAsInt();
 
             for(int i = 0;i<resp.getAsJsonArray("data").size();i++){
             	beginTime= resp.getAsJsonArray("data").get(i).getAsJsonObject().get("beginTime").getAsInt();   
                 endTime= resp.getAsJsonArray("data").get(i).getAsJsonObject().get("endTime").getAsInt();
                 id= resp.getAsJsonArray("data").get(i).getAsJsonObject().get("id").getAsString();
                 num= resp.getAsJsonArray("data").get(i).getAsJsonObject().get("num").getAsInt();
+                startDliveryTime= resp.getAsJsonArray("data").get(i).getAsJsonObject().get("startDeliveryTime").getAsInt();
             	gett.put("beginTime"+i, secToTime(beginTime));
                 gett.put("endTime"+i, secToTime(endTime));
                 gett.put("id"+i, id);
                 gett.put("num"+i, num);
-//              gett.put("startDliveryTime"+i, startDliveryTime);
+                gett.put("startDliveryTime"+i, startDliveryTime);
             }
             gett.put("length", resp.getAsJsonArray("data").size());
             
@@ -530,6 +532,16 @@ public class takeoutFoodUntils extends TestBase{
 	        return retStr;  
 	    }  
 	    
-
+	    //查询数据库
+        @Test
+        public void test(){
+                
+                DBHelper.setdruidDataSource(druidDataSource);
+                
+                    Map<String, String> conditions = new HashMap<String, String>();
+                    conditions.put("id", "0ea42c7e3bbb4e1f98d6c0b3348a9c11");
+                
+                System.out.println(DBHelper.query("delivery_price", conditions));
+        }
 
 }

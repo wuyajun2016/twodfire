@@ -1,5 +1,6 @@
 package com.dfire.testBase;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.dfire.test.util.CsvDataProvider;
 import com.dfire.utils.HttpRequestEx;
 import com.google.gson.JsonObject;
@@ -29,8 +30,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
+import javax.annotation.Resource;
+
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 public class TestBase extends AbstractTestNGSpringContextTests {
+	
+	@Resource(name = "dataSource")
+	public DruidDataSource druidDataSource;
+	
 	public static Logger logger = LoggerFactory.getLogger("biz");
 	public static String csvFile;
 	public static String bossurl;
